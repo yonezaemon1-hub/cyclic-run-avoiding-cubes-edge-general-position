@@ -1,0 +1,478 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  10pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=24mm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Exact edge general position in cyclic run-avoiding cubes for
+every k \textgreater=
+3}\label{exact-edge-general-position-in-cyclic-run-avoiding-cubes-for-every-k-3}
+
+Ryutaro Yonezu (Independent Researcher)\\
+Research No.78 · Preprint version 1.0 · 20 November 2026
+
+\textbf{Status.} AI-assisted, not human peer reviewed. THEOREM /
+UNIQUENESS: CONDITIONAL PASS in the independent AI audit. NOVELTY
+INCONCLUSIVE; REFERENCES PARTIAL. Copyright © 2026 Ryutaro Yonezu. All
+rights reserved.
+
+\subsection{Editorial scope of this combined
+edition}\label{editorial-scope-of-this-combined-edition}
+
+This edition contains the complete, unchanged mathematical prose of
+frozen v0.2 and its parent v0.1. The v0.2 supplement establishes the
+stated result for every integer n \textgreater= k \textgreater= 3; its
+proofs for k \textgreater= 4 depend on the full parent v0.1 §§1--5,
+reproduced below. The parent's unresolved k=3 statement is a historical
+record of its earlier stage and is resolved by the later supplement. The
+k \textgreater= 4 proof is analytic. The k = 3 proof uses exact integer
+computation for 1,296 required transfer-matrix bases and an exhaustive
+n=4 equality check, together with an analytic strong induction. This
+edition makes no assertion for k=2 or n\textless k.
+
+The independent auditor reported no mathematical defect within its
+documented scope but retained PUBLICATION PRIVATE HOLD. The author
+authorized conditional publication. The auditor's original signed
+identity and a verbatim comparison with its chat answer were not
+verified. Four optional SAT runs did not prove optimality; they are not
+premises of the theorem. No human peer review or proof-assistant
+formalization was performed.
+
+\subsection{Prior work and
+attribution}\label{prior-work-and-attribution}
+
+Klavžar and Tan (2023, DOI 10.1007/s40840-023-01517-y) study edge
+general position in the ordinary Fibonacci and Lucas cubes (k=2); their
+coordinate-class construction is prior work. Ilić, Klavžar, and Rho
+(2012, DOI 10.2298/AADM120108002I) define generalized Lucas cubes via
+avoidance of a cyclic forbidden word: the present graph H(n,k) is their
+generalized Lucas-cube model with forbidden word 1\^{}k. The model and
+its naming are therefore prior work. Mollard (2020, arXiv:2004.10198)
+concerns perfect codes in Lucas and generalized Lucas cubes, a different
+graph invariant. The literature review is partial; priority of the
+edge-general-position formula and classification is not established.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Frozen supplement v0.2: complete source
+text}\label{frozen-supplement-v0.2-complete-source-text}
+
+\section{Exact edge general position in cyclic run-avoiding cubes for
+every k \textgreater=
+3}\label{exact-edge-general-position-in-cyclic-run-avoiding-cubes-for-every-k-3-1}
+
+No.78 v0.2 --- PRIVATE HOLD --- 2026-11-19 JST Author-side
+computer-assisted proof candidate. Independent AI audit and Windows
+reproduction pending. NOVELTY INCONCLUSIVE / REFERENCES PARTIAL. Not
+peer reviewed. All rights reserved.
+
+\subsection{Scope and relationship to frozen
+v0.1}\label{scope-and-relationship-to-frozen-v0.1}
+
+This supplement extends the theorem of the byte-frozen v0.1 manuscript
+(in FROZEN\_V01.zip) from k\textgreater=4 to every integer
+n\textgreater=k\textgreater=3. The parent contains the independent
+elementary star and projection lemmas, the count and density
+recurrences, and the analytic k\textgreater=4 proof. No result from
+No.75--77 is assumed. The new k=3 upper bound uses an exact finite
+transfer-matrix certificate and an analytic induction in the gaps, not
+enumeration of all large graphs.
+
+Let H(n,k) be the induced graph of the n-cube on binary words with no
+cyclic block of k ones; let C\_n\^{}(k) denote its order and A\_m\^{}(k)
+the linear run-avoiding word count, with A\_0=1. Edge general position
+means that no geodesic contains three distinct selected edges. Set
+B\_n=2(C\_n\textsuperscript{(k)-A\_(n-1)}(k)).
+
+\textbf{Theorem (candidate).} For every n\textgreater=k\textgreater=3,
+gp\_e(H(n,k))=B\_n, and its maximum sets are exactly the unions of two
+distinct complete coordinate edge classes.
+
+The lower bound and equality classification within sets using at most
+two directions follow from v0.1 §1. The full case k\textgreater=4 is
+v0.1 §§2--5, unchanged. It remains to prove k=3, including the equality
+case n=4.
+
+\subsection{1. Four-coordinate exclusion lemma for cyclic triple
+avoidance}\label{four-coordinate-exclusion-lemma-for-cyclic-triple-avoidance}
+
+Let n\textgreater=4, let four distinct marked coordinates be given in
+cyclic order, and let c be ANY four-bit pattern (no feasibility
+restriction is imposed). Let E denote the number of legal cyclic words
+differing from c at exactly two of the marked coordinates, and let C
+denote the total number of legal words. Then
+
+\begin{verbatim}
+11 E >= 3 C.
+\end{verbatim}
+
+Proof. Let the positive integer gaps g\_1,\ldots,g\_4 be the cyclic
+distances between successive marked coordinates, summing to n.~A
+rotation lets the first marked coordinate be 0. The state r=0,1,2 counts
+the trailing ones. With rows denoting source states and columns denoting
+destination states, write
+
+\begin{verbatim}
+T_0 = [[1,0,0],[1,0,0],[1,0,0]],
+T_1 = [[0,1,0],[0,0,1],[0,0,0]],
+T = T_0+T_1.
+\end{verbatim}
+
+For a prescribed marked bit pattern b, the number of legal completions
+is
+
+\begin{verbatim}
+N_g(b) = tr( T_(b_1) T^(g_1-1) ... T_(b_4) T^(g_4-1) ).
+\end{verbatim}
+
+Indeed each closed state walk gives a cyclic word with no triple ones.
+Every legal word has at least one zero, which forces state 0 immediately
+after it and determines all states uniquely; conversely the all-one word
+cannot give a closed walk. This proves the trace identity, with fixed
+labeled positions and no division by rotations. Thus C=sum\_b N\_g(b)
+and E=sum\_(d\_H(b,c)=2) N\_g(b).
+
+Direct matrix multiplication gives T\textsuperscript{3=T}2+T+I. For any
+g\_i\textgreater=4, the value L(g,c)=11E-3C is the sum of its three
+values with g\_i replaced by g\_i-1,g\_i-2,g\_i-3 and all other gaps and
+c unchanged. This follows by linearity in the corresponding power of T,
+without any positivity assumption on the coefficients in L. All new gaps
+remain positive, so lowering a gap also leaves a valid four-mark cyclic
+instance. Induction on the total gap sum reduces L\textgreater=0 to g in
+\{1,2,3\}\^{}4 and all c in \{0,1\}\^{}4. This inclusion of ALL c is
+essential: no assumption about preserving feasibility under gap
+reduction is made.
+
+The finite certificate verify\_v02.py verifies 81 gap tuples times 16
+center patterns = 1,296 inequalities by exact integer matrix
+multiplication. It independently counts each projection histogram by
+directly enumerating all words of the corresponding length (4 through
+12). Both methods agree on every histogram. Minimum E/C is 3/11 and
+there are eight base equality cases. This completes the
+computer-assisted induction. The lower bound 3/11 is sharp as a
+universal four-coordinate inequality (for example n=4, center pattern of
+weight one).
+
+\subsection{2. Upper bound for k=3,
+n\textgreater=5}\label{upper-bound-for-k3-n5}
+
+Suppose S uses at least three directions. By the elementary star lemma
+proved in v0.1 §1, it is a star forest. If its largest star degree
+d\textless=3, then \textbar S\textbar{} \textless= 3C/4 \textless{}
+19C/25 \textless= B\_n, using the density recurrence proved in v0.1 §2.
+
+If d\textgreater=4, choose any four arms of a star at vertex z. Let c be
+its projected pattern on these four coordinates. Every legal vertex x
+counted by E in §1 has two agreements and two disagreements with z on
+these coordinates. For any incident selected edge direction l, remove l
+from the four marked coordinates if it is present. At least one
+agreement i and one disagreement j remain. These are two different arms
+of the star, distinct from l. The projection of the incident edge onto
+i,j is a leaf of the two-arm star. The projection lemma of v0.1 §1
+forbids that edge. Thus all E vertices are excluded from incidence with
+S. Since a star forest has no more edges than its incident vertices,
+\textbar S\textbar{} \textless= C-E \textless= 8C/11 \textless{} 19C/25
+\textless= B\_n.~Both degree cases are strict. This proves the value and
+classification for all n\textgreater=5, k=3.
+
+\subsection{3. Small cases and equality}\label{small-cases-and-equality}
+
+For n=3, k=3: C=7, B=6, and any S using at least three directions has
+\textbar S\textbar\textless=3C/4\textless6. For n=4, k=3: C=11, B=8. The
+degree bound gives \textbar S\textbar\textless= floor(4C/5)=8,
+irrespective of star degree for sets using at least three directions. To
+settle uniqueness of the coordinate-pair form even here, verify\_v02.py
+separately builds the actual 11-vertex, 16-edge graph, computes BFS
+distances from every vertex, and enumerates every geodesic by moving
+along edges of increasing source distance. It generates 96 forbidden
+edge triples, tests all binomial(16,8)=12,870 eight-edge subsets and all
+binomial(16,9)=11,440 nine-edge subsets. Exactly six eight-edge sets
+survive, precisely the unions of two complete coordinate classes; no
+nine-edge set survives. Any larger set would have a nine-edge subset, so
+this also independently confirms the value 8.
+
+This completes the stated candidate theorem within
+n\textgreater=k\textgreater=3. No n\textless k convention is asserted.
+No k=2 result is assumed or claimed by this supplement.
+
+\subsection{Verification and
+limitations}\label{verification-and-limitations}
+
+Parent v0.1 manifest, finite verifier, and expected stdout checked
+afresh from the frozen ZIP. The new exact verifier uses Python 3.10+
+standard library, no numerical solvers. Its finite checks are part of
+the k=3 proof and do not independently establish the analytic lemmas.
+Independent mathematical audit of the complete parent and supplement is
+still required. The source search is inherited as preliminary only; no
+additional priority claim is made in this revision. See parent
+references. Do not publish.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Frozen parent v0.1: complete source
+text}\label{frozen-parent-v0.1-complete-source-text}
+
+The PRIVATE HOLD and unresolved k=3 statements below are historical
+statements from the frozen parent. Consult the v0.2 supplement above for
+the full final mathematical scope and the author's later release
+authorization.
+
+\section{Exact edge general position numbers of cyclic run-avoiding
+cubes for k \textgreater=
+4}\label{exact-edge-general-position-numbers-of-cyclic-run-avoiding-cubes-for-k-4}
+
+No.78 v0.1 --- PRIVATE HOLD --- 2026-11-19 JST Author-side analytic
+proof candidate. Independent AI audit and Windows reproduction pending.
+NOVELTY INCONCLUSIVE / REFERENCES PARTIAL. Not peer reviewed. All rights
+reserved.
+
+\subsection{Model and results}\label{model-and-results}
+
+For integers n\textgreater=k\textgreater=3, let H(n,k) be the induced
+subgraph of the binary n-cube on words containing no cyclic block of k
+ones. Write C\_n=C\_n\^{}(k) for its order, and A\_m=A\_m\^{}(k) for the
+number of linear length-m words avoiding k consecutive ones (A\_0=1). A
+selected edge set S is in edge general position if no three distinct
+selected edges lie on a common geodesic. Let B\_n=2(C\_n-A\_(n-1)).
+
+Theorem: For all n\textgreater=k\textgreater=4, gp\_e(H(n,k))=B\_n.~The
+maximum sets are exactly the unions of any two distinct complete
+coordinate edge classes.
+
+Partial result for k=3: gp\_e=B\_n at n=3,4. For n\textgreater=5, any S
+larger than B\_n must use at least three coordinates and have largest
+star degree between 4 and 11 inclusive. No claim of equality for all k=3
+is made.
+
+No.75--77 main theorems are not assumed. The elementary projection and
+star lemmas used in No.77 are reproduced below. The proof of the theorem
+is analytic; finite checks are corroboration only.
+
+\subsection{1. Geometry and lower bound}\label{geometry-and-lower-bound}
+
+The legal family is downward closed. A path via x AND y between any
+legal x,y attains Hamming distance, so H(n,k) is isometric in Q\_n.~A
+geodesic never repeats a coordinate. Each coordinate class has
+C\_n-A\_(n-1) edges: a legal word with a one there corresponds to its
+downward edge, and words with a zero there are exactly linear legal
+words of length n-1. Rotation gives the same count in every direction.
+Any union of two classes is in edge general position, of size B\_n.~A
+set using at most two coordinates cannot exceed B\_n; equality requires
+two complete classes.
+
+Projection lemma: If S contains two edges of a star at c, in coordinates
+i,j, then a selected edge in another coordinate l cannot project on i,j
+to a leaf of that two-arm star. Indeed let z be the corresponding leaf
+and w the endpoint of the edge with w\_l=z\_l. These vertices agree on
+i,j,l. Concatenate the other leaf -\textgreater{} c -\textgreater{} z, a
+geodesic from z to w, and the selected edge. The directions of these
+parts are disjoint, so this is a geodesic containing three selected
+edges, a contradiction.
+
+Star lemma: If S uses at least three directions, the graph of its
+selected edges is a star forest. A simple three-edge path must repeat a
+direction, else it is a geodesic. Its directions must then be i,j,i. The
+two consecutive two-arm stars have leaf projections on i,j covering all
+four patterns, so the projection lemma forbids a third direction
+anywhere. Thus no simple three-edge path exists. The selected graph is
+bipartite, hence its nontrivial components are stars. If the maximum
+degree is d and E vertices are excluded from incidence with S, then
+\textbar S\textbar\textless=d/(d+1)(C\_n-E).
+
+\subsection{2. Counting and density}\label{counting-and-density}
+
+The linear counts satisfy A\_m=2\^{}m for 0\textless=m\textless k and
+A\_m=sum\_\{j=1\}\^{}k A\_(m-j) for m\textgreater=k. The cyclic counts
+satisfy C\_j=2\^{}j-1 for 1\textless=j\textless=k under the
+periodic-word convention at j\textless k, and C\_n=sum\_\{j=1\}\^{}k
+C\_(n-j) for n\textgreater k. To see this, take the k-state matrix T of
+transitions of the run of ones: every state r=0..k-1 can move to state 0
+by emitting zero, and r\textless k-1 can move to r+1 by emitting one.
+Legal cyclic words correspond bijectively to closed walks with a fixed
+starting index, since at least one zero determines all run states
+uniquely. Thus C\_j=tr(T\^{}j) for positive j. The characteristic
+polynomial is x\textsuperscript{k-x}(k-1)-\ldots-1 (companion matrix, up
+to transposition/convention), and Cayley-Hamilton gives the recurrence
+for n\textgreater k. Consequently any fixed linear combination of C\_n
+and A\_(n-1) satisfies this recurrence for n\textgreater=k+1, and a
+nonnegative (or positive) block of k consecutive values propagates
+forward.
+
+For k\textgreater=5, B\_n/C\_n\textgreater10/11 for n\textgreater=k.
+This is equivalent to 6C\_n-11A\_(n-1)\textgreater0. At n=k this
+difference is 2\^{}(k-1)-6\textgreater0. For n=k+t with
+1\textless=t\textless=k-1, two disjoint starts of maximal runs of length
+at least k in a non-all-one cyclic word are impossible (would require at
+least 2k+2 positions). A bad non-all-one cyclic word has a unique
+occurrence of 0 followed by k ones. Hence
+C\_n=2\textsuperscript{n-1-n\emph{2\^{}(n-k-1). For linear length m=n-1,
+an illegal word similarly has exactly one maximal long-run start, either
+at the first position or preceded by zero. Thus
+A\_(n-1)=2\^{}(n-1)-(t+1)}2}(t-2). Substitution gives
+6C\_n-11A\_(n-1)=2\textsuperscript{(t-2)(2}(k+1)-12k-t+11)-6. For t=1
+the expression in parentheses is at least 14 (at k=5, increasing in k),
+hence the difference is at least 1. For 2\textless=t\textless=k-1 it is
+at least 2\^{}(k+1)-13k+12\textgreater=11 (increasing for
+k\textgreater=5), hence the difference is \textgreater=5. The k positive
+bases n=k..2k-1 propagate by recurrence.
+
+For k=4, B\_n/C\_n\textgreater=11/13 for n\textgreater=4: verify
+n=4,5,6,7 by C=(15,26,51,99), A\_(n-1)=(8,15,29,56), and propagate
+13B\_n-11C\_n.~In addition B\_n/C\_n\textgreater6/7 for n\textgreater=6:
+verify n=6,7,8,9, yielding C=(51,99,191,367), A\_(n-1)=(29,56,108,208),
+hence 7B\_n-6C\_n=(2,8,16,24), all positive. (At n=9:
+7\emph{318-6}367=24.) Propagate this block of four values.
+
+For k=3, B\_n/C\_n\textgreater=19/25 for n\textgreater=5: the three
+bases n=5,6,7 have C=(21,39,71), A\_(n-1)=(13,24,44), B=(16,30,54). The
+differences 25B-19C are (1,9,1), and the recurrence propagates them.
+
+\subsection{3. Uniform vertex exclusion}\label{uniform-vertex-exclusion}
+
+Suppose a star at c has d arms. Choose m pairwise nonadjacent cyclic
+coordinates among the arms. The induced graph of these coordinates in
+the cycle is a union of paths if proper, or a cycle if full. Thus at
+least floor(d/2) independent coordinates exist; for d odd and the
+coordinate set proper this improves to ceil(d/2).
+
+Let X be a uniform legal vertex. Conditional on specified bits at any
+subset of the chosen coordinates, the probability of either value at any
+other chosen coordinate is between 1/5 and 4/5. Deleting a one injects
+the conditioned one class into the zero class. Turning a zero to one and
+clearing both cyclic neighbors gives a legal word (the new one is
+isolated; downward closure handles the other positions) and preserves
+the condition. It has at most four preimages, since only the two former
+neighbor bits are unknown. Thus the zero class is at most four times the
+one class. The same bounds apply to agreement or disagreement with the
+fixed center c.
+
+Let Y be the number of disagreements on these m coordinates. The event
+2\textless=Y\textless=m-2 excludes the vertex from every selected edge:
+after ignoring its incident edge direction, at least one agreeing and
+one disagreeing star coordinate remain. Their two-bit projection is a
+leaf of a two-arm star, forbidden by the projection lemma.
+
+A uniform lower bound p\_m on this event holds even for adaptive
+conditional distributions. Set f\_m(s)=1 for 2\textless=s\textless=m-2
+and 0 otherwise. For j=m-1,\ldots,0 set f\_j(s)=min\{(4
+f\_(j+1)(s)+f\_(j+1)(s+1))/5,(f\_(j+1)(s)+4 f\_(j+1)(s+1))/5\}. Backward
+induction using the conditional probability interval proves the bound
+p\_m=f\_0(0). Exact arithmetic gives p\_4=9/125, p\_5=97/625,
+p\_6=757/3125. In particular \textbar S\textbar{} \textless=
+d/(d+1)(1-p\_m) C\_n, and also \textbar S\textbar{} \textless= (1-p\_m)
+C\_n.
+
+\subsection{4. Upper bound for
+k\textgreater=5}\label{upper-bound-for-k5}
+
+Assume three or more selected directions. Then S is a star forest. If
+d\textless=10, \textbar S\textbar\textless=10 C\_n/11\textless B\_n.~If
+d\textgreater=11, at least five independent coordinates exist, so
+\textbar S\textbar\textless=(528/625)C\_n \textless10
+C\_n/11\textless B\_n.~This gives strict inequality for all sets using
+three or more directions.
+
+\subsection{5. Upper bound for k=4}\label{upper-bound-for-k4}
+
+Again assume three or more directions. When d\textless=5,
+\textbar S\textbar\textless=5 C\_n/6\textless11
+C\_n/13\textless=B\_n.~If d=6 then n\textgreater=6, where
+B\_n/C\_n\textgreater6/7, giving strict inequality. If
+7\textless=d\textless=9 and n\textgreater=8, there exist four pairwise
+nonadjacent arm coordinates (in particular for d=7 it is a proper subset
+of the cycle). Hence \textbar S\textbar\textless= (9/10)(116/125) C\_n =
+(522/625) C\_n \textless{} (11/13) C\_n \textless= B\_n.~If
+d\textgreater=10, use five independent arms and
+\textbar S\textbar\textless= (528/625) C\_n \textless{} (11/13) C\_n
+\textless=B\_n.
+
+The sole missing case is n=d=7. All seven directions are arms of a star.
+Its center c is legal and has Hamming weight at most five, since six
+ones on a 7-cycle contain a run of six. If weight(c)\textgreater=2, the
+all-zero word has at least two agreements and two disagreements with
+c.~If weight(c)\textless=1, select two zero positions of c and set just
+those two positions to one, and all other positions to zero; this word
+is legal for k=4 and has between two and three disagreements and at
+least four agreements. The projection lemma excludes the resulting
+vertex. Thus \textbar S\textbar\textless=7*98/8=85.75 \textless{}
+B\_7=86. This handles all cases, including equality, and proves the
+theorem.
+
+\subsection{6. Partial result for k=3}\label{partial-result-for-k3}
+
+At n=3 all sets using three directions satisfy
+\textbar S\textbar\textless=3\emph{7/4\textless6=B\_3. At n=4 the degree
+bound yields \textbar S\textbar\textless=floor(4}11/5)=8=B\_4. At
+n\textgreater=5, d\textless=3 gives \textbar S\textbar\textless=3/4 C\_n
+\textless19/25 C\_n\textless=B\_n.~For d\textgreater=12 choose six
+independent arms, yielding \textbar S\textbar\textless=2368/3125
+C\_n\textless19/25 C\_n\textless=B\_n.~The remaining d=4..11 are not
+resolved by these inequalities. No uniqueness claim at n=4.
+
+\subsection{References and scope}\label{references-and-scope}
+
+Klavzar and Tan, Edge General Position Sets in Fibonacci and Lucas
+Cubes, Bull. Malays. Math. Sci. Soc. 46 (2023), DOI
+10.1007/s40840-023-01517-y. Ordinary k=2 problem and standard two-class
+construction. That construction is not claimed new. Mollard, The
+(non-)existence of perfect codes in Lucas cubes, arXiv:2004.10198:
+generalized Lucas cube context, different parameter (perfect codes). The
+literature search was preliminary; other uses of k-Lucas cube or
+generalized Lucas cube can describe different models. Full citation
+review and priority assessment pending. No world-first claim. No public
+release authorized.
+
+\end{document}
